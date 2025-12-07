@@ -17,8 +17,7 @@ CREATE TABLE IF NOT EXISTS users (
   name VARCHAR(255) NOT NULL,
   email VARCHAR(255) UNIQUE,
   password VARCHAR(255)
-
-  CONSTRAINT 
+)
 
 
 -- EXISTS Clause : The SQL EXISTS clause is primarily used to filter rows based on the existence of related records in another table or to enforce conditional logic in subqueries
@@ -106,6 +105,34 @@ SELECT * FROM new_datatypes;
 -- Note: All the numeric data types may have an extra option: UNSIGNED or ZEROFILL. If you add the UNSIGNED option, MySQL disallows negative values for the column. If you add the ZEROFILL(depricated) option, MySQL automatically also adds the UNSIGNED attribute to the column.
 );
 
+
+-- Constraints
+-- 1. NOT NULL
+-- 2. UNIQUE
+-- 3. DEFAULT
+-- 4. CHECK
+-- 5. PRIMARY KEY
+-- 6. FOREIGN KEY
+
+-- FOREIGN KEY CONSTRAINTS
+-- CASCADE
+-- NOT NULL
+-- RESTRICT -> DEFAULT
+-- NO ACTION
+
+-- THERE ARE TWO WAYS TO DEFINE / ADD THESE CONSTRAINTS
+-- 1. Write / ADD these in front of Columns name after datatype
+-- Eg. name VARCHAR(255) NOT NULL UNIQUE
+
+-- 2. You can also define the constraints after all the columns have been defined
+-- eg. CONSTRAINT `name of constratint` UNIQUE(column name)
+
+-- ADVANTAGES
+-- THERE is an additive advantage of the later you can delete this constraint whenever you want but '
+-- but in the 1. Method this is not feasible.
+-- Moreover through second method you can club multiple columns for eg. if you want to hold only unique pair
+-- of name and email addresses you cannot do so by using first method but using 2 method this can be done as follow
+-- eg. CONSTRAINT user_name_email UNIQUE(name,email)
 
 
 
