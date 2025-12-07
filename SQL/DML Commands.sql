@@ -128,8 +128,19 @@ WHERE price > 50000;
 -- f. Less than or equal to ( <= )
 
 -- 3. STRING Operator
--- a. LIKE
+-- a. LIKE -> % *
+-- b. NOT LIKE
+-- c. Concatenation operator (||)
 
+-- 4. Logical Operator
+-- a. AND
+-- b. OR
+-- c. IS NULL
+-- d. EXISTS
+-- e. BETWEEN
+-- f. ALL
+-- g. ANY
+-- f. NOT
 
 -- FETCH THE NAME OF THE BRANDS THAT MAKE PHONE PRICE greater than 50000
 SELECT brand_name
@@ -138,3 +149,26 @@ WHERE price > 50000;
 
 
 -- FURTHER WE HAVE UPDATE AND DELETE COMMANDS -> Works SIMILAR TO ABOVE.
+
+-- FUNCTIONS ->
+-- MAX / MIN
+-- AVG
+-- COUNT
+-- SUM
+-- STD
+-- VARIANCE
+
+
+-- Find the most expensive  samsung phone from the data
+SELECT max(price) from smartphones WHERE brand_name = "samsung";
+
+-- Find the number of smasung phones
+SELECT COUNT(model)
+FROM smartphones
+WHERE brand_name = "samsung";
+
+-- SCALER FUNCTION 
+-- ABS
+-- ROUND
+-- CEIL / FLOOR
+
