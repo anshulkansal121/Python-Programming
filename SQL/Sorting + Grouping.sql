@@ -91,7 +91,32 @@ GROUP BY has_nfc
 
 -- HAVING CLAUSE
 -- Costliest Brand which has at least 20 phones.
+SELECT brand_name, AVG(price)
+FROM smartphones
+GROUP BY brand_name
+HAVING COUNT(*) > 20
+ORDER BY AVG(price) DESC
+LIMIT 1
 
 -- find the avg rating of smartphone brands that have more than 20 phones
+SELECT brand_name, AVG(rating)
+FROM smartphones
+GROUP BY brand_name
+HAVING COUNT(*) > 40
+ORDER BY AVG(rating) DESC
+
+
 -- Find the top 3 brands with the highest avg ram that has a refresh rate of at least 90 Hz and fast charging available and don't consider brands that have less than 10 phones
+SELECT brand_name, AVG(ram_capacity) as "Avg_Ram"
+FROM smartphones
+WHERE refresh_rate >= 90 AND fast_charging_available = 1
+GROUP BY brand_name
+HAVING COUNT(model) < 10
+ORDER BY Avg_Ram DESC LIMIT 3;
+
 -- Find the avg price of all the phone brands with avg rating of 70 and num_phones more than 10 among all 5g enabled phones
+SELECT brand_name, AVG(price)
+FROM smartphones
+WHERE has_5g = "True"
+GROUP BY brand_name
+HAVING AVG(rating) > 70 AND COUNT(model) > 10
