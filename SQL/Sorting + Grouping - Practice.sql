@@ -86,6 +86,7 @@ GROUP BY `State`
 ORDER BY AVG(Value) ASC
 LIMIT 1
 
+-- END
 
 
 
