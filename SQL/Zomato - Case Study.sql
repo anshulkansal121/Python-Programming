@@ -31,4 +31,43 @@ WHERE restaurant_rating IS NOT NULL
 GROUP BY r_name
 
 -- Find the food that is being sold at most number of resturants
+SELECT f_name,COUNT(*) as "Number of Time ordered"
+FROM food f JOIN menu m
+ON f.f_id = m.f_id
+GROUP BY f_name
+ORDER BY "Number of Time ordered" DESC;
 
+-- find restraunt with max revenue in a given month
+SELECT r_name, MONTHNAME(DATE(date)), SUM(amount) as "Revenue" 
+FROM orders o JOIN restaurants r
+ON o.r_id = r.r_id
+GROUP BY r_name, MONTHNAME(DATE(date))
+ORDER BY Revenue DESC;
+
+-- Find restaurant with sales > 1500
+SELECT r_name, SUM(amount) 
+FROM orders o JOIN restaurants r
+ON o.r_id = r.r_id
+GROUP BY r_name
+HAVING SUM(amount) > 1500;
+
+-- Find Customer Who have never ordered
+SELECT u.user_id, u.name
+FROM users u
+WHERE u.user_id NOT IN (SELECT DISTINCT(o.user_id) FROM orders o)
+
+-- Customer Favourite Food
+WITH customer_orders as (
+SELECT u.name,od.f_id, COUNT(*) as "Number_of_time_Ordered", DENSE_RANK() OVER(PARTITION BY u.name ORDER BY COUNT(*) DESC) as "RANKING"
+FROM users u JOIN orders o
+ON u.user_id = o.user_id
+JOIN order_details od 
+ON o.order_id = od.order_id
+GROUP BY u.name,od.f_id
+)
+
+SELECT *
+FROM customer_orders
+WHERE RANKING = 1
+
+-- Find Most Costly Restaurant (AVG price / Dish)
