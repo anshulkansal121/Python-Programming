@@ -71,3 +71,5 @@ FROM customer_orders
 WHERE RANKING = 1
 
 -- Find Most Costly Restaurant (AVG price / Dish)
+-- Completed
+
