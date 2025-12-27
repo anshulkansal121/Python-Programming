@@ -113,3 +113,21 @@ SELECT
 FROM orders
 GROUP BY MONTHNAME(date)
 ORDER BY MONTHNAME(date) DESC
+
+
+-- Cummulative Sum
+SELECT *,
+SUM(marks) OVER(PARTITION BY branch ORDER BY marks ROWS BETWEEN UNBOUNDED PRECEDING AND CURRENT ROW) AS "cumulative_marks"
+FROM marks;
+
+-- Calculating Cumulative Average
+SELECT *,
+AVG(marks) OVER(PARTITION BY branch ORDER BY marks ROWS BETWEEN UNBOUNDED PRECEDING AND CURRENT ROW) AS "average_marks"
+FROM marks;
+
+-- Calculating the running average - Moving Average
+-- A proper example would be - The average marks of a student in his recent 5 exams
+SELECT *,
+AVG(marks) OVER(PARTITION BY branch ORDER BY marks ROWS BETWEEN 5 PRECEDING AND 0 FOLLOWING)
+FROM marks;
+    
