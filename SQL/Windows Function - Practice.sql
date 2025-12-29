@@ -13,8 +13,13 @@ AVG(claim) OVER(partition by children)
 from insurance;
 
 -- What is the highest and lowest claimed amount by patients in each region?
+SELECT *,
+MIN(claim) OVER(PARTITION BY region),
+MAX(claim) OVER(PARTITION BY region)
+FROM insurance;
 
 -- What is the percentage of smokers in each age group?
+
 
 -- What is the difference between the claimed amount of each patient and the first claimed amount of that patient?
 
