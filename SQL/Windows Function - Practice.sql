@@ -1,9 +1,16 @@
 
 -- For the problems use the *Health Insurance Claim* dataset. You can get the details as well as the dataset from(https://www.kaggle.com/datasets/thedevastator/insurance-claim-analysis-demographic-and-health).
 SELECT * FROM insurance;
+
 -- What are the top 5 patients who claimed the highest insurance amounts?
+SELECT *, 
+ROW_NUMBER() OVER(ORDER BY claim DESC) FROM insurance
+LIMIT 5;
 
 -- What is the average insurance claimed by patients based on the number of children they have?
+SELECT *,
+AVG(claim) OVER(partition by children)
+from insurance;
 
 -- What is the highest and lowest claimed amount by patients in each region?
 
