@@ -1,0 +1,69 @@
+Q1: 
+SELECT emp_id, name, dept, salary, COUNT(*) as emp_count
+FROM employees
+WHERE salary > 50000
+GROUP BY dept
+HAVING COUNT(*) > 5
+
+
+Q3
+-- APPROACH 1:
+-- DENSE_RANK()
+
+with temp_table AS(
+SELECT *,
+DENSE_RANK() OVER(ORDER BY salary DESC) as ranking
+FROM employees
+WHERE dept = "Engineering"
+)
+
+SELECT * FROM temp_table WHERE ranking = 2
+
+-- APPROACH 2:
+-- OFFSET
+SELECT DISTINCT salary 
+FROM employees
+WHERE Dept = "Enginnering"
+ORDER BY salary DESC
+LIMIT 1
+OFFSET 1
+
+
+-- APPROACH 3:
+SUBQUERY
+SELECT MAX(salary) as second_highest
+FROM employees
+WHERE dept - "Engineering" AND
+salary < (SELECT MAX(salary) FROM employees WHERE dept = "Engineering")
+
+
+Q4:
+SELECT c.customer_id, name, email
+FROM customers c 
+LEFT JOIN orders o
+ON c.customer_id = o.customer_id
+WHERE o.order_id IS NULL
+
+Q5:
+
+Q6:
+SELECT e.emp_id, e.name AS emloyee, m.name as manager 
+FROM emaployees e
+LEFT JOIN employees m on e.manager_id = m.emp_id
+
+Q7:
+SELECT 
+session_date,
+COUNT(DISTINCT user_id) AS 'Active User'
+FROM user_sesisons
+GROUP BY session_date
+
+Q8:
+SELECT customer_id
+FROM orders
+WHERE YEAR(order_date) IN (2023,2024)
+GROUP BY customer_id
+HVING COUNT(Distinct YEAR(order_date)) = 2
+
+
+
